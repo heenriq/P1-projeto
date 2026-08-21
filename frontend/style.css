@@ -1,0 +1,77 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #1b2a4a;
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 0 20px;
+  line-height: 1.5;
+
+  /* Fundo com cor de fallback e imagem JPG */
+  background-color: #f5faf9; /* Cor de fundo caso a imagem não carregue */
+  /* background-image: url("./aMYzmbA_700b.jpg") */; /* Caminho da imagem */
+  background-size: cover; /* Faz a imagem cobrir toda a área */
+  background-position: center; /* Centraliza a imagem */
+  background-repeat: no-repeat; /* Evita repetição */
+  background-attachment: fixed; /* Mantém a imagem fixa ao rolar */
+}
+
+h1 {
+  color: #1b2a4a;
+}
+
+section {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid #d8e6e2;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 20px 0;
+}
+
+h2 {
+  font-size: 16px;
+  color: #0f6f6b;
+  margin-top: 0;
+}
+
+.explicacao {
+  color: #5a6b72;
+  font-style: italic;
+}
+
+button {
+  background-color: #0f6f6b;
+  color: #ffffff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  margin: 4px 4px 4px 0;
+}
+
+button:hover {
+  background-color: #3fbf9c;
+}
+
+input,
+select {
+  font-size: 15px;
+  padding: 6px 8px;
+  margin: 4px 8px 4px 0;
+  border: 1px solid #d8e6e2;
+  border-radius: 4px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+p {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#cupom {
+  white-space: pre-line;
+}
