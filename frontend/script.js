@@ -23,7 +23,7 @@
 // aula 03 -----
 // 01 exercicio fetch
 async function carregarCardapio() {
-  const resposta = await fetch("http://localhost:3000/cardapio");
+  const resposta = await fetch(`https://${BACKEND_URL}/cardapio`);
   const itens = await resposta.json();
   console.log(itens);
 
@@ -44,7 +44,7 @@ async function carregarCardapio() {
 carregarCardapio();
 
 //exercicio 03
-const URL_API = "http://localhost:3000";
+const URL_API = `https://${BACKEND_URL}/cardapio` || "http://localhost:3000";
 const cupom = document.querySelector("#cupom");
 
 function popularSelect(idSelect, itens) {
