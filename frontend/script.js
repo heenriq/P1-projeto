@@ -44,7 +44,10 @@ async function carregarCardapio() {
 carregarCardapio();
 
 //exercicio 03
-const URL_API = `https://${BACKEND_URL}/cardapio` || "http://localhost:3000";
+const URL_API =
+  window.location.hostname === "localhost"
+    ? "http://localhost:3000"
+    : "https://eita-29o3.onrender.com/";
 const cupom = document.querySelector("#cupom");
 
 function popularSelect(idSelect, itens) {
@@ -65,7 +68,7 @@ btnCalcularPedido.addEventListener("click", async function () {
   const molho = selectMolho.value;
 
   // 2. Envia para o servidor (observe as chaves dentro do body)
-  const resposta = await fetch("http://localhost:3000/pedido", {
+  const resposta = await fetch(`${URL_API}/pedido`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ pao: pao, recheio: recheio, molho: molho }),
