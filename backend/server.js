@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5500"
+
 app.use(cors());
 app.use(express.json());
 

@@ -8,7 +8,7 @@ body {
 
   /* Fundo com cor de fallback e imagem JPG */
   background-color: #f5faf9; /* Cor de fundo caso a imagem não carregue */
-  /* background-image: url("./aMYzmbA_700b.jpg") */; /* Caminho da imagem */
+  background-image: url("./aMYzmbA_700b.jpg"); /* Caminho da imagem */ 
   background-size: cover; /* Faz a imagem cobrir toda a área */
   background-position: center; /* Centraliza a imagem */
   background-repeat: no-repeat; /* Evita repetição */
