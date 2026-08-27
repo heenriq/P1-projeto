@@ -1,57 +1,41 @@
-// const btnCalcularPedido = document.querySelector("#btnCalcularPedido")
-// const cupom = document.querySelector("#cupom")
+// 1. Defina a URL base da sua API do Render corretamente (sem barra no final)
+const URL_API =
+  window.location.hostname === "localhost"
+    ? "http://localhost:3000"
+    : "https://eita-29o3.onrender.com";
 
-// btnCalcularPedido.addEventListener("click", function() {
-//   const pao = selectPao.value;
-//   const recheio = selectRecheio.value;
-//   const molho = selectMolho.value;
+const cupom = document.querySelector("#cupom");
+const btnCalcularPedido = document.querySelector("#btnCalcularPedido");
 
-//   const valorTotal = precos.pao[pao] + precos.recheio[recheio] + precos.molho[molho];
-//   console.log(valorTotal)
-
-//   cupom.textContent =
-//   `
-//   =============================================
-//    Pao: ${pao} ....... R$${precos.pao[pao].toFixed(2)}
-//    Recheio: ${recheio} ...... R$${precos.recheio[recheio].toFixed(2)}
-//    Molho: ${molho} ......R$${precos.molho[molho].toFixed(2)}
-//    ------------------------------------------------------
-//    Total: R$ ${valorTotal.toFixed(2)}`
-
-// })
-
-// aula 03 -----
-// 01 exercicio fetch
+// 2. Função para carregar o cardápio
 async function carregarCardapio() {
-  const resposta = await fetch(`https://${BACKEND_URL}/cardapio`);
-  const itens = await resposta.json();
-  console.log(itens);
+  try {
+    const resposta = await fetch(`${URL_API}/cardapio`);
+    const itens = await resposta.json();
 
-  popularSelect(
-    "selectPao",
-    itens.filter((item) => item.categoria === "pao"),
-  );
-  popularSelect(
-    "selectRecheio",
-    itens.filter((item) => item.categoria === "recheio"),
-  );
-  popularSelect(
-    "selectMolho",
-    itens.filter((item) => item.categoria === "molho"),
-  );
+    popularSelect(
+      "selectPao",
+      itens.filter((item) => item.categoria === "pao"),
+    );
+    popularSelect(
+      "selectRecheio",
+      itens.filter((item) => item.categoria === "recheio"),
+    );
+    popularSelect(
+      "selectMolho",
+      itens.filter((item) => item.categoria === "molho"),
+    );
+  } catch (erro) {
+    console.error("Erro ao carregar cardápio:", erro);
+  }
 }
 
 carregarCardapio();
 
-//exercicio 03
-const URL_API =
-  window.location.hostname === "localhost"
-    ? "http://localhost:3000"
-    : "https://eita-29o3.onrender.com/";
-const cupom = document.querySelector("#cupom");
-
 function popularSelect(idSelect, itens) {
   const select = document.querySelector(`#${idSelect}`);
+  if (!select) return;
+
   for (let i = 0; i < itens.length; i++) {
     const item = itens[i];
     const option = document.createElement("option");
@@ -61,26 +45,36 @@ function popularSelect(idSelect, itens) {
   }
 }
 
-btnCalcularPedido.addEventListener("click", async function () {
-  // 1. Pega os valores selecionados nos TRES selects
-  const pao = selectPao.value;
-  const recheio = selectRecheio.value;
-  const molho = selectMolho.value;
+// 3. Evento do botão de calcular pedido corrigido
+if (btnCalcularPedido) {
+  btnCalcularPedido.addEventListener("click", async function () {
+    const pao = document.querySelector("#selectPao").value;
+    const recheio = document.querySelector("#selectRecheio").value;
+    const molho = document.querySelector("#selectMolho").value;
 
-  // 2. Envia para o servidor (observe as chaves dentro do body)
-  const resposta = await fetch(`${URL_API}/pedido`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ pao: pao, recheio: recheio, molho: molho }),
+    try {
+      const resposta = await fetch(`${URL_API}/pedido`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pao: pao, recheio: recheio, molho: molho }),
+      });
+
+      const dados = await resposta.json();
+
+      if (dados.erro) {
+        cupom.innerText = `Erro: ${dados.erro}`;
+        return;
+      }
+
+      const totalFormatado = dados.total.toFixed(2);
+
+      cupom.innerText =
+        `Pão: ${dados.itens.pao}\n` +
+        `Recheio: ${dados.itens.recheio}\n` +
+        `Molho: ${dados.itens.molho}\n` +
+        `Total: R$ ${totalFormatado}`;
+    } catch (erro) {
+      console.error("Erro ao enviar pedido:", erro);
+    }
   });
-
-  const dados = await resposta.json();
-
-  const totalFormatado = dados.total.toFixed(2);
-
-  cupom.innerText =
-    `Pão: ${dados.itens.pao}\n` +
-    `Recheio: ${dados.itens.recheio}\n` +
-    `Molho: ${dados.itens.molho}\n` +
-    `Total: R$ ${totalFormatado}`;
-});
+}
