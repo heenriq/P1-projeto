@@ -8,7 +8,7 @@ body {
 
   /* Fundo com cor de fallback e imagem JPG */
   background-color: #f5faf9; /* Cor de fundo caso a imagem não carregue */
-  background-image: url("./aMYzmbA_700b.jpg"); /* Caminho da imagem */ 
+  /* background-image: url("./aMYzmbA_700b.jpg"); */ /* Caminho da imagem */
   background-size: cover; /* Faz a imagem cobrir toda a área */
   background-position: center; /* Centraliza a imagem */
   background-repeat: no-repeat; /* Evita repetição */
@@ -75,3 +75,58 @@ p {
 #cupom {
   white-space: pre-line;
 }
+
+.escondido {
+  visibility: hidden;
+  display: none;
+}
+
+.cardapio-container h3 {
+  font-size: 18px;
+  color: #0f6f6b;
+  margin: 16px 0 8px;
+}
+
+.card-grid {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #d8e6e2;
+}
+
+.card-grid:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.card-item {
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid #d8e6e2;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+}
+
+.card-item img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+
+.card-item .card-nome {
+  font-size: 14px;
+  font-weight: bold;
+  color: #1b2a4a;
+  margin: 4px 0 2px;
+}
+
+.card-item .card-preco {
+  font-size: 13px;
+  color: #0f6f6b;
+  margin: 0;
+}
+

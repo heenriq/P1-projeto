@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <section>
+    <section id="pagina1" class="">
       <h2>Desafio Final - Calculadora de Sanduiche Interativa</h2>
       <label>
         Pao:
@@ -21,7 +21,13 @@
         <select id="selectMolho"></select>
       </label>
       <button id="btnCalcularPedido">Calcular Pedido</button>
+      <button id="btnCardapio">Ver Cardapio</button>
       <p id="cupom"></p>
+    </section>
+    <section id="pagina2" class="escondido">
+      <h2>Cardápio</h2>
+      <div class="cardapio-container"></div>
+      <button id="btnVoltar">Voltar</button>
     </section>
 
     <script src="script.js"></script>
