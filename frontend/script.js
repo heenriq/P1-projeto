@@ -49,12 +49,18 @@ if (btnCalcularPedido) {
     const pao = document.querySelector("#selectPao").value;
     const recheio = document.querySelector("#selectRecheio").value;
     const molho = document.querySelector("#selectMolho").value;
+    const cupomDesconto = document.querySelector("#desconto").value.trim();
 
     try {
       const resposta = await fetch(`${URL_API}/pedido`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ pao: pao, recheio: recheio, molho: molho }),
+        body: JSON.stringify({
+          pao: pao,
+          recheio: recheio,
+          molho: molho,
+          cupom: cupomDesconto,
+        }),
       });
 
       const dados = await resposta.json();
@@ -66,11 +72,19 @@ if (btnCalcularPedido) {
 
       const totalFormatado = dados.total.toFixed(2);
 
-      cupom.innerText =
-        `Pão: ${dados.itens.pao}\n` +
-        `Recheio: ${dados.itens.recheio}\n` +
-        `Molho: ${dados.itens.molho}\n` +
-        `Total: R$ ${totalFormatado}`;
+      if (dados.itens.cupom === true) {
+        cupom.innerText =
+          `Pão: ${dados.itens.pao}\n` +
+          `Recheio: ${dados.itens.recheio}\n` +
+          `Molho: ${dados.itens.molho}\n` +
+          `Total: R$ ${totalFormatado} | Desconto de 15% aplicado pelo nosso professor!`;
+      } else {
+        cupom.innerText =
+          `Pão: ${dados.itens.pao}\n` +
+          `Recheio: ${dados.itens.recheio}\n` +
+          `Molho: ${dados.itens.molho}\n` +
+          `Total: R$ ${totalFormatado} | Sem descontos!`;
+      }
     } catch (erro) {
       console.error("Erro ao enviar pedido:", erro);
     }

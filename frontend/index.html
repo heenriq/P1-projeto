@@ -4,11 +4,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>P1 projeto</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/png" href="/favicon.png?v=3" />      
+    <link rel="icon" type="image/png" href="/favicon.png?v=3" />
   </head>
   <body>
     <section id="pagina1" class="">
-      <h2>Desafio Final - Calculadora de Sanduiche Interativa</h2>
+      <h2>Calcular pedido</h2>
       <label>
         Pao:
         <select id="selectPao"></select>
@@ -21,9 +21,11 @@
         Molho:
         <select id="selectMolho"></select>
       </label>
+      <input type="text" id="desconto" placeholder="Cupom de Desconto" />
+      <br />
       <button id="btnCalcularPedido">Calcular Pedido</button>
-      <button id="btnCardapio">Ver Cardapio</button>
       <p id="cupom"></p>
+    </section>
 
     <script src="script.js"></script>
   </body>
