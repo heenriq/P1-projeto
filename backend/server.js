@@ -42,7 +42,7 @@ app.get("/cardapio/:categoria", (req, res) => {
 
 function buscarPreco(categoria, nome) {
   const item = cardapio.find(
-    (item) => (item.categoria === categoria) & (item.nome === nome),
+    (item) => (item.categoria === categoria) && (item.nome === nome),
   );
   return item ? item.preco : 0;
 }
@@ -51,20 +51,39 @@ function buscarPreco(categoria, nome) {
 
 app.post("/pedido", (req, res) => {
   const { pao, recheio, molho } = req.body;
+  let cupom = req.body.cupom
+  console.log("Cupom recebido:", JSON.stringify(cupom));
+  
   // aqui adicionamos uma validação para nao permitir o UNDEFINED.
   if (!pao || !recheio || !molho) {
     return res.json({ erro: "Envie pao, recheio e molho" });
   }
+  if (cupom.toUpperCase() === "RAFAELVENTURAPROFESSOR") {
+    cupom = true;
 
-  const total =
-    buscarPreco("pao", pao) +
-    buscarPreco("recheio", recheio) +
-    buscarPreco("molho", molho);
+    const total =
+      (buscarPreco("pao", pao) +
+        buscarPreco("recheio", recheio) +
+        buscarPreco("molho", molho)) *
+      0.85;
 
-  res.json({
-    itens: { pao, recheio, molho },
-    total: Number(total.toFixed(2)),
-  });
+    res.json({
+      itens: { pao, recheio, molho, cupom },
+      total: Number(total.toFixed(2)),
+    });
+  } else {
+    cupom = false;
+
+    const total =
+      buscarPreco("pao", pao) +
+      buscarPreco("recheio", recheio) +
+      buscarPreco("molho", molho);
+
+    res.json({
+      itens: { pao, recheio, molho, cupom },
+      total: Number(total.toFixed(2)),
+    });
+  }
 });
 
 app.listen(3000, () => {
