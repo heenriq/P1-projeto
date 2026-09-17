@@ -73,21 +73,13 @@ if (btnCalcularPedido) {
       });
 
       const dadosFrete = await resFrete.json();
-      let Frete;
-      if (dadosFrete.tipo === "frete") {
-        Frete = 5;
-      } else if (dadosFrete.tipo === "descontado") {
-        Frete = 2.5;
-      } else {
-        Frete = 0;
-      }
 
       cupom.innerText =
         `Pão: ${dados.itens.pao}\n` +
         `Recheio: ${dados.itens.recheio}\n` +
         `Molho: ${dados.itens.molho}\n` +
         `Subtotal: R$ ${totalFormatado}\n` +
-        `Frete: R$ ${Frete}\n` +
+        `Frete: R$ ${dadosFrete.valorFrete}\n` +
         `total: R$ ${dadosFrete.result}`;
     } catch (erro) {
       console.error("Erro ao enviar pedido:", erro);
