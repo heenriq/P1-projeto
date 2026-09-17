@@ -15,6 +15,17 @@ body {
   background-attachment: fixed; /* Mantém a imagem fixa ao rolar */
 }
 
+div {
+  box-sizing: border-box;
+  padding: 7px;
+  background-color: #e0e3e481;
+  border: 1px solid;
+  border-color: #cfcfcf;
+  border-radius: 5px;
+  color: #0f6f6c9c;
+  line-height: 25px;
+}
+
 h1 {
   color: #1b2a4a;
 }
@@ -28,7 +39,7 @@ section {
 }
 
 h2 {
-  font-size: 16px;
+  font-size: 18px;
   color: #0f6f6b;
   margin-top: 0;
 }
