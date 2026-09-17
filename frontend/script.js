@@ -64,13 +64,31 @@ if (btnCalcularPedido) {
         return;
       }
 
-      const totalFormatado = dados.total.toFixed(2);
+      const totalFormatado = dados.total;
+
+      const resFrete = await fetch("http://localhost:4000/frete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ valor: totalFormatado }),
+      });
+
+      const dadosFrete = await resFrete.json();
+      let Frete;
+      if (dadosFrete.tipo === "frete") {
+        Frete = 5;
+      } else if (dadosFrete.tipo === "descontado") {
+        Frete = 2.5;
+      } else {
+        Frete = 0;
+      }
 
       cupom.innerText =
         `Pão: ${dados.itens.pao}\n` +
         `Recheio: ${dados.itens.recheio}\n` +
         `Molho: ${dados.itens.molho}\n` +
-        `Total: R$ ${totalFormatado}`;
+        `Subtotal: R$ ${totalFormatado}\n` +
+        `Frete: R$ ${Frete}\n` +
+        `total: R$ ${dadosFrete.result}`;
     } catch (erro) {
       console.error("Erro ao enviar pedido:", erro);
     }
